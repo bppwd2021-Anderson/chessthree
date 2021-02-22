@@ -1,14 +1,36 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public abstract class Piece {
     public String color;
     Tile[] openTiles;
-    boolean inPlay;
+    public boolean inPlay;
+    public String pieceType;
+    public static ArrayList<Piece> pieces = new ArrayList<Piece>();
 
-    public abstract void move();
+    public void move(){
+        switch (pieceType){
+            case "pawn":
+                break;
+            case "rook":
+                break;
+            case "king":
+                break;
+            case "queen":
+                break;
+            case "bishop":
+                break;
+            case "knight":
+                break;
+        }
+    }
 
     void Piece(){
 
+    }
+    public void kill(){
+        pieces.remove(this);
     }
 
 }

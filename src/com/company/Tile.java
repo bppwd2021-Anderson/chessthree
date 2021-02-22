@@ -4,7 +4,9 @@ public class Tile {
     public Piece pieceHeld;
     boolean threatened;
     int[] location;
-    void Tile(int x, int y){
+    int value;
+
+    public Tile(int x, int y){
         this.location = new int[]{x,y};
     }
     public void updateThreaten(boolean newCon){
