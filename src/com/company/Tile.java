@@ -6,7 +6,8 @@ public class Tile {
     public Piece pieceHeld;
     public ArrayList<Piece> threatenedBy = new ArrayList<>();
     public int[] location;
-    public int value;
+    public int bValue;
+    public int wValue;
 
     public Tile(int x, int y){
         this.location = new int[]{x,y};
@@ -24,14 +25,12 @@ public class Tile {
     public boolean addToHeld(Piece newPiece){
         if(pieceHeld == null) {
             pieceHeld = newPiece;
-            value += newPiece.value;
+//            value += newPiece.value;
             return true;
         }
         else if(!pieceHeld.color.equals(newPiece.color)){
-            value -= pieceHeld.value;
             pieceHeld.kill();
             pieceHeld = newPiece;
-            value += newPiece.value;
             return true;
         }
         return false;// Only if there is a same colored piece in the way
@@ -42,13 +41,28 @@ public class Tile {
         return tempPiece;
     }
     public void update() {
-        if (pieceHeld != null){
-            value = pieceHeld.value;
+        if (pieceHeld != null && threatenedBy.size() != 0){
+            int whiteCount = 0;
+            int blackCount = 0;
+            for(Piece piece : threatenedBy) {
+                if(piece.color.equalsIgnoreCase("black")){
+                    blackCount++;
+                }
+                else if(piece.color.equalsIgnoreCase("white")){
+                    whiteCount++;
+                }
+            }
+            if(whiteCount > blackCount){
+                if(blackCount > 0){
+                    wValue -= blackCount * 2;
+                }
+                else{
+                    bValue += whiteCount;
+                }
+            }
+//            value = pieceHeld.value;
         }
-        for(Piece piece : threatenedBy) {
 
-
-        }
     }
 
     @Override
